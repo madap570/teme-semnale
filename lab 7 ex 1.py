@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 N = 200
 
-# n1, n2 = np.indices((N, N))
+n1, n2 = np.indices((N, N))
 #
 # x1 = np.sin(2*np.pi*n1 + 3*np.pi*n2)
 # plt.imshow(x1, cmap=plt.cm.gray)
@@ -18,11 +18,12 @@ N = 200
 # x2 = np.sin(4*np.pi*n1) + np.cos(6*np.pi*n2)
 # plt.imshow(x2, cmap=plt.cm.gray)
 # plt.show()
-#
+
 # y2 = np.fft.fft2(x2)
 # plt.imshow(20*np.log10(np.abs(y2)))
 # plt.colorbar()
 # plt.show()
+
 # def functieY1(N):
 #     Y = np.zeros((N, N), dtype=np.uint16)
 #     Y[0, [5, N-5]] = 1
@@ -36,6 +37,7 @@ N = 200
 #     return Y
 #
 # Y1 = functieY1(N)
+# print(Y1)
 # plt.imshow(Y1, cmap=plt.cm.gray)
 # plt.show()
 #
@@ -44,21 +46,43 @@ N = 200
 # plt.colorbar()
 # plt.show()
 
-def functieY2(N):
+# def functieY2(N):
+#     Y = np.zeros((N, N), dtype=np.uint16)
+#     Y[5, 0] = Y[N - 5, 0] = 1
+#     for m1 in range(N):
+#         for m2 in range(N):
+#             if m1 not in [0, 5, N - 5] and m2 not in [0, 5, N - 5]:
+#                 Y[m1, m2] = 0
+#
+#     return Y
+#
+# Y2 = functieY2(N)
+# plt.imshow(Y2, cmap=plt.cm.gray)
+# plt.show()
+#
+# y4 = np.fft.fft2(Y2)
+# plt.imshow(20*np.log10(np.abs(y4)))
+# plt.colorbar()
+# plt.show()
+
+def functieY3(N):
     Y = np.zeros((N, N), dtype=np.uint16)
-    Y[5, 0] = Y[N - 5, 0] = 1
+    Y[5, 5] = Y[N - 5, N - 5] = 1
+
     for m1 in range(N):
         for m2 in range(N):
-            if m1 not in [0, 5, N - 5] and m2 not in [0, 5, N - 5]:
+            if (m1, m2) not in [(5, 5), (N - 5, N - 5)]:
                 Y[m1, m2] = 0
 
     return Y
 
-Y2 = functieY2(N)
-plt.imshow(Y2, cmap=plt.cm.gray)
+Y3 = functieY3(N)
+plt.imshow(Y3, cmap=plt.cm.gray)
 plt.show()
 
-y4 = np.fft.fft2(Y2)
-plt.imshow(20*np.log10(np.abs(y4)))
+y5 = np.fft.fft2(Y3)
+plt.imshow(20*np.log10(np.abs(y5)))
 plt.colorbar()
 plt.show()
+
+
